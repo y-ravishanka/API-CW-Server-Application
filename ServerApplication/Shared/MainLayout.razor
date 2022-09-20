@@ -1,0 +1,157 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager navigate
+@inject IJSRuntime JSRuntime
+
+@if (t == 0)
+{
+    <PageTitle>ServerApplication</PageTitle>
+    if(nav == 0)
+    {
+        
+    }
+    else if(nav == 1)
+    {
+        <div class="page">
+            <div class="sidebar">
+                <NavMenu />
+            </div>
+
+            <main>
+                <div class="top-row px-4">
+                    <button class="btn btn-dark" @onclick="gotoCount">Counter</button>
+                </div>
+
+                <article class="content px-4">
+                    @Body
+                </article>
+            </main>
+        </div>
+    }
+}
+else if(t==1)
+{
+    <PageTitle>API Documentation</PageTitle>
+
+    <div class="page">
+        <main>
+            <div class="top-row px-4">
+                <button class="btn btn-dark" @onclick="goback"><span class="oi oi-arrow-thick-left"></span></button>
+            </div>
+        </main>
+    </div>
+}
+
+<div class="container-fluid cus_color">
+    <div class="row mt-5 mx-4">
+        <div class="container-fluid">
+            <div class="w3-content px-4 py-4 cus_border">
+                <div class="row">
+                    <div class="container-fluid item_center">
+                        <h1>Sri Lanka Largest Talent Market</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid item_center">
+                        <h3>Register your Self to Descover by the Nations and Worlds Top Level Companies</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid item_center">
+                        <h5>Sri Lanka Bureau of Foreign Employment</h5><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid item_center">
+                        <button class="option_buttons my-2 px-4"><b>Register</b></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid item_center">
+                        <button class="my-button">if you have a account, login</button>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-content mt-3 px-4 py-4 cus_border">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div>Our Vision -</div>
+                        </div>
+                        <div class="row">
+                            <i>“Sri Lanka to be the best choice for competent human resources for overseas market.”</i>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row item_center">
+                            <div class="container-fluid item_center">
+                                <div>Registered Accounts</div>
+                            </div>
+                        </div>
+                        <div class="row item_center">
+                            <div class="container-fluid item_center">
+                                <h2>568239</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-content ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="w3-content mt-3 px-4 py-4 cus_border">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="item_center my-2">Download our Android Application</div>
+                                </div>
+                                <div class="row">
+                                    <div class="container-fluid item_center">
+                                        <button class="search_button mb-2">Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="w3-content mt-3 px-4 py-4 cus_border">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="item_center my-2">Visit our API Document</div>
+                                </div>
+                                <div class="row">
+                                    <div class="container-fluid item_center">
+                                        <button class="search_button mb-2" @onclick="apiview">View</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="container-fluid item_center" style="font-size:12px;">our APIs facilitate to anyone around the world to access our database.Find the talents you want from Sri Lankas' lagest talent market</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int t = 0;
+    private int nav = 0;
+
+    private void gotoCount()
+    {
+        t = 1;
+    }
+
+    private void goback()
+    {
+        t = 0;
+    }
+
+    private async void apiview()
+    {
+        //navigate.NavigateTo("https://localhost:7242/swagger/index.html",true,false);
+        string[] values = {"https://localhost:7242/swagger/index.html","_blank"};
+        await JSRuntime.InvokeAsync<object>("open", values);
+    }
+}
